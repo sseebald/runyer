@@ -5,7 +5,7 @@ module MCollective
         if MCollective::Util.windows?
           begin
             command = '<%= @command %>'
-            reply[:output] = %x(#{command})
+            reply[:out] = %x(#{command})
             reply[:status] = $?.exitstatus
           rescue Process::Error => e
             reply[:status] = "There was a problem executing COMMAND: \`#{command}\`"
