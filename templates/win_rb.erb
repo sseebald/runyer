@@ -2,15 +2,11 @@ module MCollective
   module Agent
     class <%= @action_name.capitalize %><RPC::Agent
       action "run" do
-
-        command = '<%= @command %>'
-	command = "cmd /c #{command}"
-
         if MCollective::Util.windows?
-          require 'win32/process'
-	  begin
-            Process.create(:command_line => command, :creation_flags => Process::CREATE_NO_WINDOW)
-            reply[:status] = "Successfully executed COMMAND: \`#{command}\`"
+          begin
+            command = '<%= @command %>'
+            reply[:output] = %x(#{command})
+            reply[:status] = $?.exitstatus
           rescue Process::Error => e
             reply[:status] = "There was a problem executing COMMAND: \`#{command}\`"
             reply[:err] = e.to_s
