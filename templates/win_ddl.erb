@@ -13,10 +13,10 @@ action "run", :description => '<%= @description %>' do
          :description => "Status after attempt to execute run",
          :display_as  => "Service Status"
 
-#  output :out,
-#         :description => "No stdout currently on Windows",
-#         :display_as  => "stdout",
-#         :default     => "stdout unsupported"
+  output :out,
+         :description => "stdout",
+         :display_as  => "stdout",
+         :default     => "nothing"
 
   output :err,
          :description => "Error messages",
